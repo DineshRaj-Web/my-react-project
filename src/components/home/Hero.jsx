@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -23,7 +24,7 @@ export default function Hero() {
   const mouseSpring = useSpring(mousePosition, springConfig);
 
   return (
-    <section className="relative min-h-screen px-6 md:px-16 py-16 flex flex-col md:flex-row items-center justify-center overflow-hidden bg-[var(--bg)] text-[var(--text)]">
+    <section className="relative min-h-screen px-6 md:px-16 pt-32 pb-16 flex flex-col md:flex-row items-center justify-center overflow-hidden bg-[var(--bg)] text-[var(--text)]">
 
       {/* Interactive 3D Background with Parallax */}
       <div className="absolute inset-0 md:hidden">
@@ -58,7 +59,7 @@ export default function Hero() {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="relative z-10 flex-1 text-center md:text-left">
+      <div className="relative z-10 flex-1 text-center md:text-left flex flex-col items-center md:items-start">
 
         {/* Interactive Heading with Magnetic Effect */}
         <motion.div
@@ -71,13 +72,13 @@ export default function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-cyan-400 font-medium text-lg md:text-xl mb-4 tracking-wide"
+            className="text-cyan-400 font-bold text-sm md:text-xl mb-4 tracking-[0.2em] uppercase"
           >
             HELLO, I'M DINESH
           </motion.h2>
 
           <motion.h1
-            className="text-4xl md:text-7xl lg:text-8xl font-bold leading-tight text-white mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.1] tracking-tighter text-white mb-6"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{
@@ -96,7 +97,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto md:mx-0 leading-relaxed"
+            className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto md:mx-0 leading-relaxed px-4 md:px-0"
           >
             A <span className="text-white font-medium">Full Stack Developer</span> focused on crafting scalable, high-performance applications. I turn complex problems into elegant, user-centric solutions.
           </motion.p>
@@ -109,22 +110,24 @@ export default function Hero() {
           transition={{ delay: 0.6, duration: 0.6 }}
           className="flex flex-wrap gap-4 justify-center md:justify-start mb-12"
         >
-          <motion.a
-            href="#work"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:shadow-cyan-500/25 transition-all"
-          >
-            View My Work
-          </motion.a>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all"
-          >
-            Let's Talk
-          </motion.a>
+          <Link to="/work">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg shadow-lg hover:shadow-cyan-500/25 transition-all"
+            >
+              View My Work
+            </motion.button>
+          </Link>
+          <Link to="/contact">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-medium rounded-lg hover:bg-white/20 transition-all"
+            >
+              Let's Talk
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Tech Stack Pills */}

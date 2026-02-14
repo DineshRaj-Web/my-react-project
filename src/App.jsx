@@ -10,11 +10,14 @@ import "./App.css";
 import { HireMeProvider } from "./context/HireMeContext";
 import SmoothScrollWrapper from "./components/wrappers/SmoothScrollWrapper";
 
+import ScrollToTop from "./components/wrappers/ScrollToTop";
+
 function App() {
   return (
     <ToastProvider>
       <HireMeProvider>
         <Router>
+          <ScrollToTop />
           <Navbar />
           <SmoothScrollWrapper>
             <AnimatedRoutes />

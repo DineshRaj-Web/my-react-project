@@ -12,14 +12,14 @@ export default function WorkPreview() {
     return (
         <section className="py-24 px-6 md:px-16 bg-black text-white relative border-t border-white/10">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                    <div>
-                        <h2 className="text-cyan-500 font-bold tracking-widest uppercase mb-4">Selected Work</h2>
-                        <h3 className="text-3xl md:text-5xl font-bold">
+                <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6">
+                    <div className="text-center md:text-left">
+                        <h2 className="text-cyan-500 font-bold tracking-widest uppercase mb-4 text-sm md:text-base">Selected Work</h2>
+                        <h3 className="text-4xl md:text-5xl font-bold leading-tight">
                             Featured <span className="text-gray-500">Case Studies</span>
                         </h3>
                     </div>
-                    <Link to="/work">
+                    <Link to="/work" className="md:self-start">
                         <motion.button
                             whileHover={{ x: 10 }}
                             className="text-white border-b border-white pb-1 hover:text-cyan-400 hover:border-cyan-400 transition-colors text-lg"

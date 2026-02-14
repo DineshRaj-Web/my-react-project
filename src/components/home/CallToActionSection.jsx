@@ -25,10 +25,10 @@ export default function CallToActionSection() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full blur-[150px] animate-pulse" />
             </div>
 
-            <div className="relative z-10 text-center max-w-4xl mx-auto">
-                <h2 className="text-6xl md:text-8xl font-black text-white mb-8 tracking-tighter">
-                    Ready to <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-500">
+            <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
+                <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[1.1]">
+                    Ready to <br className="hidden md:block" />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-500 block md:inline mt-2 md:mt-0">
                         Disrupt?
                     </span>
                 </h2>

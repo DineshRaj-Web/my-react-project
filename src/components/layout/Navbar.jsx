@@ -34,7 +34,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 w-full z-50 px-6 py-6 pointer-events-none flex justify-between items-start">
+      <nav className="fixed top-0 w-full z-50 px-6 py-6 pointer-events-none flex justify-between items-center">
         {/* Logo - Floats Left */}
         <div className="pointer-events-auto">
           <Link
@@ -85,12 +85,12 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <div className="lg:hidden pointer-events-auto">
           <div
-            className="w-12 h-12 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex flex-col justify-center items-center space-y-1.5 text-white cursor-pointer hover:bg-white/10 transition-all duration-300"
+            className="w-10 h-10 bg-black/40 backdrop-blur-md border border-white/10 rounded-full flex flex-col justify-center items-center space-y-1 text-white cursor-pointer hover:bg-white/10 transition-all duration-300"
             onClick={() => setOpen(!open)}
           >
-            <div className={`w-5 h-0.5 bg-current transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
-            <div className={`w-5 h-0.5 bg-current transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
-            <div className={`w-5 h-0.5 bg-current transition-all duration-300 ${open ? '-rotate-45 -translate-y-2' : ''}`} />
+            <div className={`w-4 h-0.5 bg-current transition-all duration-300 ${open ? 'rotate-45 translate-y-1.5' : ''}`} />
+            <div className={`w-4 h-0.5 bg-current transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
+            <div className={`w-4 h-0.5 bg-current transition-all duration-300 ${open ? '-rotate-45 -translate-y-1.5' : ''}`} />
           </div>
         </div>
 
@@ -101,7 +101,7 @@ const Navbar = () => {
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className="lg:hidden absolute top-20 right-6 left-6 pointer-events-auto bg-black/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
+              className="lg:hidden absolute top-20 right-4 left-4 pointer-events-auto bg-black/90 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl overflow-hidden z-50"
             >
               <div className="p-6 space-y-2">
                 {navItems.map((item) => (
@@ -109,7 +109,7 @@ const Navbar = () => {
                     key={item.id}
                     to={`/${item.id}`}
                     onClick={(e) => handleHomeClick(e, item.id === "")}
-                    className={`block px-4 py-3 text-lg font-medium transition-all duration-300 ${isActive(item.id)
+                    className={`block px-4 py-3 text-center text-lg font-medium transition-all duration-300 ${isActive(item.id)
                       ? 'text-white bg-white/10'
                       : 'text-gray-400 hover:text-white hover:bg-white/5'
                       } rounded-xl`}
@@ -118,13 +118,13 @@ const Navbar = () => {
                   </Link>
                 ))}
 
-                <div className="pt-6 mt-4 border-t border-white/10 space-y-3">
+                <div className="pt-6 mt-4 border-t border-white/10 flex flex-col gap-3">
                   <button
                     onClick={() => {
                       openHireMePopup();
                       setOpen(false);
                     }}
-                    className="block w-full px-4 py-3 bg-white text-black text-lg font-bold rounded-xl hover:scale-[1.02] transition-transform duration-300 text-center"
+                    className="w-full px-4 py-3 bg-white text-black text-lg font-bold rounded-xl hover:scale-[1.02] transition-transform duration-300 text-center shadow-lg"
                   >
                     Hire Me
                   </button>
@@ -132,7 +132,7 @@ const Navbar = () => {
                     to="/Dinesh_Sample_Resume.pdf"
                     target="_blank"
                     onClick={() => setOpen(false)}
-                    className="block w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-lg font-medium rounded-xl hover:bg-white/10 transition-all duration-300 text-center"
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-lg font-medium rounded-xl hover:bg-white/10 transition-all duration-300 text-center"
                   >
                     View Resume
                   </Link>
