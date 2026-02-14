@@ -17,10 +17,11 @@ export const HireMeProvider = ({ children }) => {
     );
 };
 
-export const useHireMe = () => {
+// eslint-disable-next-line react-refresh/only-export-components
+export function useHireMe() {
     const context = useContext(HireMeContext);
     if (!context) {
         throw new Error("useHireMe must be used within a HireMeProvider");
     }
     return context;
-};
+}

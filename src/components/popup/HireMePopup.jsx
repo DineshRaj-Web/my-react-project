@@ -23,7 +23,7 @@ const HireMePopup = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -35,7 +35,7 @@ const HireMePopup = ({ isOpen, onClose }) => {
         project: '',
         message: ''
       });
-    } catch (error) {
+    } catch {
       setSubmitMessage("An error occurred. Please try again later.");
     } finally {
       setIsSubmitting(false);
@@ -55,7 +55,7 @@ const HireMePopup = ({ isOpen, onClose }) => {
         className="absolute inset-0 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
       />
-      
+
       {/* Popup Content */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -171,11 +171,10 @@ const HireMePopup = ({ isOpen, onClose }) => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className={`p-4 rounded-lg text-center ${
-                submitMessage.includes("Thank you") 
-                  ? "bg-green-500/20 border border-green-500/50 text-green-400"
-                  : "bg-red-500/20 border border-red-500/50 text-red-400"
-              }`}
+              className={`p-4 rounded-lg text-center ${submitMessage.includes("Thank you")
+                ? "bg-green-500/20 border border-green-500/50 text-green-400"
+                : "bg-red-500/20 border border-red-500/50 text-red-400"
+                }`}
             >
               {submitMessage}
             </motion.div>

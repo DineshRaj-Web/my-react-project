@@ -1,27 +1,17 @@
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const { scrollY } = useScroll();
 
-  // Mouse move handler for interactive effects
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  // Mouse move handler replaced with static clean logic if needed, 
+  // currently we just want to remove the unused listener logic if it's not being used for parity.
+  // Actually, keeping useHovered for the text effect.
 
   // Parallax effect for background elements
   const backgroundY = useTransform(scrollY, [0, 1000], [0, -50]);
-
-  // Spring animation for magnetic effect
-  const springConfig = { damping: 25, stiffness: 400 };
-  const mouseSpring = useSpring(mousePosition, springConfig);
 
   return (
     <section className="relative min-h-screen px-6 md:px-16 pt-32 pb-16 flex flex-col md:flex-row items-center justify-center overflow-hidden bg-[var(--bg)] text-[var(--text)]">

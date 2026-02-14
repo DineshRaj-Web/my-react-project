@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useToast } from "../../context/ToastContext";
 import { useHireMe } from "../../context/HireMeContext";
 
 const navItems = [
@@ -15,7 +14,6 @@ const navItems = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const { showToast } = useToast();
   const { openHireMePopup } = useHireMe();
 
   const handleHomeClick = (e, isHomeLink) => {
@@ -42,8 +40,12 @@ const Navbar = () => {
             className="group flex items-center space-x-2"
             onClick={(e) => handleHomeClick(e, true)}
           >
-            <div className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300">
-              <span className="text-white font-bold text-sm">DR</span>
+            <div className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 overflow-hidden">
+              <img
+                src="/DR-Logo.png"
+                alt="Logo"
+                className="w-full h-full object-cover p-1"
+              />
             </div>
           </Link>
         </div>

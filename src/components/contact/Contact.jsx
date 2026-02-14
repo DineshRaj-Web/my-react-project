@@ -1,6 +1,96 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 
+const ContactForm = ({ formData, handleChange, handleSubmit, errors, isSubmitting, submitMessage }) => (
+  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+    <div>
+      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Name</label>
+      <input
+        id="name"
+        type="text"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors ${errors.name ? 'border-red-500' : 'border-white/10'}`}
+        placeholder="Enter Your Name"
+      />
+      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+    </div>
+    <div>
+      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+        className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors ${errors.email ? 'border-red-500' : 'border-white/10'}`}
+        placeholder="your@email.com"
+      />
+      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+    </div>
+    <div>
+      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Phone Number</label>
+      <input
+        id="phone"
+        type="tel"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors"
+        placeholder="+91 98765 43210"
+      />
+    </div>
+    <div>
+      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Project Type</label>
+      <select
+        id="category"
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors appearance-none"
+      >
+        <option value="">Select a category</option>
+        <option value="frontend">Frontend Development</option>
+        <option value="fullstack">Full Stack Application</option>
+        <option value="freelance">Freelance Project</option>
+        <option value="career">Career Opportunity</option>
+      </select>
+    </div>
+    <div>
+      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Message</label>
+      <textarea
+        id="message"
+        name="message"
+        value={formData.message}
+        onChange={handleChange}
+        rows={4}
+        className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none ${errors.message ? 'border-red-500' : 'border-white/10'}`}
+        placeholder="Tell me about your project or opportunity..."
+      />
+      {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+    </div>
+
+    <button
+      type="submit"
+      disabled={isSubmitting}
+      className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold py-4 rounded-xl hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      {isSubmitting ? "Sending..." : "Send Message"}
+    </button>
+
+    {submitMessage && (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="text-green-400 text-center font-medium mt-4"
+      >
+        {submitMessage}
+      </motion.div>
+    )}
+  </form>
+);
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -25,7 +115,24 @@ const Contact = () => {
     if (!formData.message.trim()) tempErrors.message = "Message is required";
 
     setErrors(tempErrors);
-    return Object.keys(tempErrors).length === 0;
+
+    if (Object.keys(tempErrors).length > 0) {
+      // Explicitly define the order of fields to check top-to-bottom
+      const fieldOrder = ["name", "email", "phone", "category", "message"];
+
+      // Find the first field in the physical order that has an error
+      const firstErrorKey = fieldOrder.find(key => tempErrors[key]);
+
+      if (firstErrorKey) {
+        const element = document.getElementById(firstErrorKey);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          element.focus();
+        }
+      }
+      return false;
+    }
+    return true;
   };
 
   const handleChange = (e) => {
@@ -37,31 +144,7 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) {
-      // Scroll to first error
-      const firstError = Object.keys(errors)[0]; // Note: validate() updates state, but here we need immediate check. 
-      // Actually state update is async, so we should check the result of validate logic or re-calculate.
-      // Better approach: validate() returns isValid. We can re-run logic or trust state if we move validate inside or use immediate result.
-
-      // Let's modify validate to return the errors object for checking
-      const tempErrors = {};
-      if (!formData.name.trim()) tempErrors.name = "Name is required";
-      if (!formData.email.trim()) {
-        tempErrors.email = "Email is required";
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        tempErrors.email = "Email is invalid";
-      }
-      if (!formData.message.trim()) tempErrors.message = "Message is required";
-
-      if (Object.keys(tempErrors).length > 0) {
-        const firstErrorKey = Object.keys(tempErrors)[0];
-        const element = document.getElementById(firstErrorKey);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        return;
-      }
-    }
+    if (!validate()) return;
 
     setIsSubmitting(true);
     // Simulate API call
@@ -73,95 +156,6 @@ const Contact = () => {
       setTimeout(() => setSubmitMessage(""), 5000);
     }, 1500);
   };
-
-  // Reusable Form Component to avoid duplication logic
-  const ContactForm = ({ isMobile = false }) => (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-      <div>
-        <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Name</label>
-        <input
-          id="name"
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors ${errors.name ? 'border-red-500' : 'border-white/10'}`}
-          placeholder="Enter Your Name"
-        />
-        {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-      </div>
-      <div>
-        <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors ${errors.email ? 'border-red-500' : 'border-white/10'}`}
-          placeholder="your@email.com"
-        />
-        {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-      </div>
-      <div>
-        <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Phone Number</label>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors"
-          placeholder="+91 98765 43210"
-        />
-      </div>
-      <div>
-        <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Project Type</label>
-        <select
-          name="category"
-          value={formData.category}
-          onChange={handleChange}
-          className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors appearance-none"
-        >
-          <option value="">Select a category</option>
-          <option value="frontend">Frontend Development</option>
-          <option value="fullstack">Full Stack Application</option>
-          <option value="freelance">Freelance Project</option>
-          <option value="career">Career Opportunity</option>
-        </select>
-      </div>
-      <div>
-        <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          rows={4}
-          className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none ${errors.message ? 'border-red-500' : 'border-white/10'}`}
-          placeholder="Tell me about your project or opportunity..."
-        />
-        {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
-      </div>
-
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold py-4 rounded-xl hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isSubmitting ? "Sending..." : "Send Message"}
-      </button>
-
-      {submitMessage && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-green-400 text-center font-medium mt-4"
-        >
-          {submitMessage}
-        </motion.div>
-      )}
-    </form>
-  );
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
@@ -195,7 +189,14 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white/5 p-6 rounded-3xl border border-white/10"
             >
-              <ContactForm isMobile={true} />
+              <ContactForm
+                formData={formData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                isSubmitting={isSubmitting}
+                submitMessage={submitMessage}
+              />
             </motion.div>
 
             {/* 3. Contact Links - Mobile Specific Layout */}
@@ -215,7 +216,9 @@ const Contact = () => {
                   className="flex items-center gap-3 group"
                 >
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-xl group-hover:bg-cyan-500/20 transition-colors">
-                    🌐
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
                   </div>
                   <div className="text-left">
                     <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">LinkedIn</p>
@@ -230,7 +233,9 @@ const Contact = () => {
                   className="flex items-center gap-3 group"
                 >
                   <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-xl group-hover:bg-purple-500/20 transition-colors">
-                    📱
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
                   </div>
                   <div className="text-left">
                     <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Phone</p>
@@ -246,7 +251,9 @@ const Contact = () => {
                   className="flex flex-col items-center gap-3 group text-center"
                 >
                   <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-2xl group-hover:bg-green-500/20 transition-colors">
-                    ✉️
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
                   </div>
                   <div>
                     <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Email Me</p>
@@ -280,7 +287,9 @@ const Contact = () => {
               <div className="space-y-8">
                 <div className="flex items-start md:items-center gap-6">
                   <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-2xl border border-white/10 flex-shrink-0">
-                    📧
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
                   </div>
                   <div>
                     <p className="text-gray-500 text-sm font-bold uppercase">Email</p>
@@ -289,7 +298,9 @@ const Contact = () => {
                 </div>
                 <div className="flex items-start md:items-center gap-6">
                   <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-2xl border border-white/10 flex-shrink-0">
-                    🌐
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
                   </div>
                   <div>
                     <p className="text-gray-500 text-sm font-bold uppercase">LinkedIn</p>
@@ -298,7 +309,9 @@ const Contact = () => {
                 </div>
                 <div className="flex items-start md:items-center gap-6">
                   <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-2xl border border-white/10 flex-shrink-0">
-                    📱
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                    </svg>
                   </div>
                   <div>
                     <p className="text-gray-500 text-sm font-bold uppercase">Phone</p>
@@ -315,7 +328,14 @@ const Contact = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-white/5 p-6 md:p-12 rounded-3xl border border-white/10"
             >
-              <ContactForm />
+              <ContactForm
+                formData={formData}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+                errors={errors}
+                isSubmitting={isSubmitting}
+                submitMessage={submitMessage}
+              />
             </motion.div>
 
           </div>
