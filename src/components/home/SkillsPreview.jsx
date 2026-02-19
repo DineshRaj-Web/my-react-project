@@ -4,8 +4,11 @@ import { useRef, useState } from "react";
 
 export default function SkillsPreview() {
     const skills = [
-        "React", "Node.js", "TypeScript", "Next.js", "AWS", "Framer Motion", "Tailwind", "PostgreSQL",
-        "React", "Node.js", "TypeScript", "Next.js", "AWS", "Framer Motion", "Tailwind", "PostgreSQL"
+        "HTML", "CSS", "Sass", "JavaScript", "Bootstrap", "jQuery",
+        "React JS", "React Router 7", "Remix", "Vite", "Motion (animations)", "Shopify Polaris",
+        "Node.js", "Python", "Django", "Flask", "Java", "Spring Boot", "Servlet", "Strapi",
+        "REST API Development", "Shopify Admin API", "GraphQL", "MySQL", "PostgreSQL", "MongoDB", "Prisma",
+        "Git", "GitHub", "Vercel", "Netlify"
     ];
 
     const ref = useRef(null);
@@ -39,8 +42,8 @@ export default function SkillsPreview() {
                         whileTap={{ scale: 0.95 }}
                         className="relative px-8 py-3 rounded-full border border-white/30 bg-white/5 backdrop-blur-sm overflow-hidden group transition-all duration-300 hover:border-white hover:bg-white"
                     >
-                        <span className="relative z-10 flex items-center gap-2 font-bold text-white group-hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm">
-                            View Full Stack
+                        <span className="relative z-10 flex items-center gap-2 font-bold text-white group-hover:text-black transition-colors duration-300 uppercase tracking-widest text-sm font-mono">
+                            <span className="opacity-40">{">"}</span> EXECUTE_EXPERTISE_TRACE
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -63,23 +66,23 @@ export default function SkillsPreview() {
                 <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
                 <motion.div
-                    animate={{ x: "-50%" }}
+                    animate={{ x: "-90%" }}
                     transition={{
-                        duration: 30,
+                        duration: 800,
                         repeat: Infinity,
                         ease: "linear"
                     }}
-                    className="flex gap-12 items-center"
+                    className="flex gap-16 items-center hover:[animation-play-state:paused]"
                     style={{ width: "max-content" }}
                 >
                     {/* Tripling the list to ensure smooth infinite scroll without gaps */}
                     {[...skills, ...skills, ...skills].map((skill, index) => (
-                        <span
-                            key={index}
-                            className="text-4xl md:text-6xl font-black text-white/30 whitespace-nowrap uppercase hover:text-cyan-500/80 transition-colors duration-300 cursor-default select-none"
-                        >
-                            {skill}
-                        </span>
+                        <div key={index} className="flex items-center gap-4 font-mono select-none group/skill">
+                            <span className="text-cyan-400/40 text-2xl md:text-3xl font-black">0x{(index % 100).toString(16).padStart(2, '0')}</span>
+                            <span className="text-4xl md:text-6xl font-black text-white/70 whitespace-nowrap uppercase group-hover/skill:text-cyan-400 transition-colors duration-500">
+                                <span className="text-white/20">[</span> <span className="text-purple-400/40">"</span>{skill}<span className="text-purple-400/40">"</span> <span className="text-white/20">]</span>
+                            </span>
+                        </div>
                     ))}
                 </motion.div>
             </div>

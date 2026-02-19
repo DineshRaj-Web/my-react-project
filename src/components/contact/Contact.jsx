@@ -210,7 +210,7 @@ const Contact = () => {
               <div className="flex justify-between items-center mb-8">
                 {/* LinkedIn Left */}
                 <a
-                  href="https://linkedin.com/in/dinesh-r-24209520b/"
+                  href="https://www.linkedin.com/in/dinesh-webdevelopment/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 group"
@@ -304,7 +304,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-gray-500 text-sm font-bold uppercase">LinkedIn</p>
-                    <a href="https://linkedin.com/in/dinesh-r-24209520b/" target="_blank" rel="noopener noreferrer" className="text-xl font-medium hover:text-cyan-400 transition-colors">Dinesh Raj</a>
+                    <a href="https://www.linkedin.com/in/dinesh-webdevelopment/" target="_blank" rel="noopener noreferrer" className="text-xl font-medium hover:text-cyan-400 transition-colors">Dinesh Raj</a>
                   </div>
                 </div>
                 <div className="flex items-start md:items-center gap-6">
