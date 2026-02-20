@@ -3,94 +3,103 @@ import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 
 export default function CallToActionSection() {
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+    const [activeCard, setActiveCard] = useState(null);
     const ref = useRef(null);
 
-    const handleMouseMove = (e) => {
-        const { clientX, clientY } = e;
-        const { left, top, width, height } = ref.current.getBoundingClientRect();
-        const x = (clientX - (left + width / 2)) * 0.15;
-        const y = (clientY - (top + height / 2)) * 0.15;
-        setPosition({ x, y });
-    };
-
-    const handleMouseLeave = () => {
-        setPosition({ x: 0, y: 0 });
-    };
+    const handleMouseEnter = (cardIndex) => setActiveCard(cardIndex);
+    const handleMouseLeave = () => setActiveCard(null);
 
     return (
-        <section className="py-32 bg-black relative overflow-hidden flex items-center justify-center">
-            {/* Grid Decor - Matching site-wide pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none" />
-
-            {/* High-Vibrancy Cinematic Glows */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute w-[800px] h-[800px] bg-purple-600/5 rounded-full blur-[150px]" />
-            </div>
-
-            <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
-
-                {/* HUD Header Prompt */}
+        <section className="py-32 bg-black relative overflow-hidden">
+            <div className="relative z-10 text-center max-w-6xl mx-auto px-6">
+                {/* Hacker Terminal Header */}
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="flex flex-col items-center mb-12"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="mb-12"
                 >
-                    <div className="flex items-center gap-4 mb-6">
-                        <span className="w-8 h-px bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.8)]" />
-                        <h2 className="font-mono text-[0.6rem] tracking-widest lowercase flex items-center gap-2">
-                            <span className="text-purple-400">await</span>
-                            <span className="text-blue-400">sys</span>
-                            <span className="text-white/40">.</span>
-                            <span className="text-cyan-400">init_deployment</span>
-                            <span className="text-white/40">(</span>
-                            <span className="text-emerald-400">"READY"</span>
-                            <span className="text-white/40">)</span>
-                        </h2>
-                        <span className="w-8 h-px bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.8)]" />
+                    <div className="font-mono text-green-400 text-sm mb-4">
+                        <span className="animate-pulse">◆</span> FULL_STACK_ENGINE.READY
                     </div>
-
-                    <h2 className="text-[2.75rem] md:text-9xl font-black text-white tracking-tighter uppercase italic leading-none mb-8">
-                        Ready to <br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-white to-purple-500">
-                            DEPLOY?
-                        </span>
-                    </h2>
-
-                    <p className="text-xl md:text-2xl text-gray-100 max-w-2xl mx-auto leading-relaxed font-light tracking-tight">
-                        The future is architected by those who dare to <span className="text-white font-medium italic underline decoration-cyan-500/50">execute its logic</span>. Let's collaborate to build scalable, high-fidelity digital solutions.
-                    </p>
+                    <div className="flex items-center justify-center gap-2 mb-8">
+                        <div className="w-2 h-2 bg-green-400 rounded-full" />
+                        <h1 className="text-2xl md:text-4xl font-black text-green-400 tracking-wider">
+                            &gt; ./deploy --env=PRODUCTION
+                        </h1>
+                    </div>
                 </motion.div>
 
-                <Link to="/contact" className="inline-block group cursor-pointer pt-4">
-                    <motion.button
-                        ref={ref}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        animate={{ x: position.x, y: position.y }}
-                        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-                        whileTap={{ scale: 0.95 }}
-                        className="relative px-14 py-7 bg-white text-black font-black text-xs uppercase tracking-[0.4em] rounded-full overflow-hidden transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.1)] cursor-pointer"
-                    >
-                        <span className="relative z-10 group-hover:text-white transition-colors duration-300 flex items-center gap-3">
-                            <span className="group-hover:translate-x-1 transition-transform">{">"}</span>
-                            EXECUTE_DEPLOYMENT_REQUEST
-                        </span>
+                {/* Glitch Text */}
+                <motion.h1
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-8"
+                    style={{
+                        textShadow: '0 0 10px rgba(0, 255, 0, 0.8)',
+                        fontFamily: 'Courier New, monospace'
+                    }}
+                >
+                    {'BUILD_COMPLETE'.split('').map((char, i) => (
+                        <motion.span
+                            key={i}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: [0, 1][Math.random() > 0.5] }}
+                            transition={{ duration: 0.1 }}
+                            className="inline-block"
+                        >
+                            {char === ' ' ? '\u00A0' : char}
+                        </motion.span>
+                    ))}
+                </motion.h1>
 
-                        {/* Shimmer Effect */}
-                        <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"
-                        />
-                        <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out" />
-                    </motion.button>
-                </Link>
+                {/* Interactive Terminal */}
+                <div className="bg-black border border-green-500/30 rounded-lg p-6 font-mono text-green-400 text-sm overflow-hidden">
+                    <div className="mb-4 text-green-400">
+                        <span className="animate-pulse">$</span> dev@portfolio:~# 
+                        <span className="text-white">npm run deploy --prod</span>
+                    </div>
+                    <div className="space-y-2 text-green-400">
+                        <div>$ <span className="text-white">Optimizing assets & SSR...</span></div>
+                        <div>$ <span className="text-white">[■■■■■■■■■■■■■■■■] 100%</span></div>
+                        <div>$ <span className="text-white">Syncing database & API...</span></div>
+                        <div>$ <span className="text-green-400 animate-pulse">✓</span> <span className="text-white"> SUCCESS: Production build live</span></div>
+                    </div>
+                </div>
 
-                {/* Technical Footnote */}
-                <div className="mt-16 flex flex-col items-center gap-2 opacity-30">
-                    <span className="text-[0.5rem] font-mono tracking-[0.3em] uppercase">SYSTEM_CORE: ACTIVE</span>
-                    <div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
+                {/* Terminal CTA */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="text-center mt-12"
+                >
+                    <Link to="/contact" className="inline-block">
+                        <motion.button
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="relative px-8 py-4 bg-black border border-green-500/50 text-green-400 font-mono text-sm uppercase tracking-wider rounded overflow-hidden"
+                            style={{
+                                boxShadow: '0 0 20px rgba(0, 255, 0, 0.5), inset 0 0 10px rgba(0, 255, 0, 0.8)',
+                                fontFamily: 'Courier New, monospace'
+                            }}
+                        >
+                            <span className="relative z-10">
+                                <span className="text-white">$</span>
+                                <span className="text-green-400"> npm run contact --init</span>
+                            </span>
+                            <div className="absolute inset-0 bg-green-500/20 rounded animate-pulse"></div>
+                        </motion.button>
+                    </Link>
+                </motion.div>
+
+                {/* Status Bar */}
+                <div className="fixed bottom-0 left-0 right-0 bg-black border-t border-green-500/50 p-2 font-mono text-xs text-green-400">
+                    <span className="animate-pulse">◆</span> 
+                    <span className="text-gray-400">CONNECTION: SECURE</span>
+                    <span className="text-green-400"> | </span>
+                    <span className="text-white">ENCRYPTION: AES-256</span>
+                    <span className="text-green-400"> | </span>
+                    <span className="text-white">STATUS: RUNNING</span>
                 </div>
             </div>
         </section>

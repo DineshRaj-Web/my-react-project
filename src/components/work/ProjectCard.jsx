@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { motion, useMotionTemplate, useMotionValue, AnimatePresence } from "framer-motion";
 
 const SectionItem = React.memo(({ title, content, color, iconColor }) => (

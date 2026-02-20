@@ -144,26 +144,43 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-16 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-16 py-8 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-12">
 
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 text-center md:text-left font-mono"
+            className="space-y-4 sm:space-y-6 text-center sm:text-left font-mono col-span-1 sm:col-span-2 lg:col-span-1"
           >
             <div className="flex flex-col gap-2">
-              <span className="text-[0.7rem] text-cyan-400 tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">:: IDENTITY_MODULE</span>
-              <h3 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 via-white to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">
+              <span className="text-[0.6rem] sm:text-[0.7rem] text-cyan-400 tracking-[0.2em] sm:tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">:: IDENTITY_MODULE</span>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 via-white to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(34,211,238,0.4)]">
                 Dinesh Raj
               </h3>
             </div>
-            <p className="text-gray-100 text-sm md:text-base leading-relaxed max-w-sm">
+            <p className="text-gray-100 text-xs sm:text-sm md:text-base leading-relaxed max-w-xs sm:max-w-sm mx-auto sm:mx-0">
               <span className="text-cyan-400 font-bold">&gt;</span> Professional Software Engineer specializing in building exceptional digital experiences with modern web technologies.
             </p>
-            <div className="hidden md:flex gap-5 justify-center md:justify-start">
+            {/* Mobile Social Icons */}
+            <div className="flex sm:hidden gap-4 justify-center sm:justify-start">
+              {socialLinks.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.15, y: -3, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-10 h-10 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center text-lg hover:border-cyan-400 hover:shadow-[0_0_15px_rgba(34,211,238,0.5)] transition-all duration-300 text-gray-200"
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </div>
+            {/* Desktop Social Icons */}
+            <div className="hidden sm:flex gap-4 justify-center sm:justify-start">
               {socialLinks.map((link) => (
                 <motion.a
                   key={link.name}
@@ -172,7 +189,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.2, y: -4, color: "#22d3ee" }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-11 h-11 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center text-xl hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 text-gray-200"
+                  className="w-10 h-10 sm:w-11 sm:h-11 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center text-lg sm:text-xl hover:border-cyan-400 hover:shadow-[0_0_20px_rgba(34,211,238,0.5)] transition-all duration-300 text-gray-200"
                 >
                   {link.icon}
                 </motion.a>
@@ -181,18 +198,18 @@ export default function Footer() {
           </motion.div>
 
           {/* Links & Services Wrapper */}
-          <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-8 md:gap-12 font-mono">
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2 grid grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-12 font-mono">
             {/* Quick Links */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               <div className="flex flex-col gap-1">
-                <span className="text-[0.85rem] text-cyan-400 tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">:: Quick Links</span>
+                <span className="text-[0.7rem] sm:text-[0.85rem] text-cyan-400 tracking-[0.2em] sm:tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(34,211,238,0.4)]">:: Quick Links</span>
               </div>
-              <ul className="space-y-4 text-sm">
+              <ul className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
                 {quickLinks.map((link, index) => (
                   <motion.li
                     key={link.name}
@@ -211,7 +228,7 @@ export default function Footer() {
                       className="group text-gray-100 hover:text-cyan-400 transition-all duration-300 flex items-center gap-2 cursor-pointer"
                     >
                       <span className="text-cyan-400 font-bold opacity-0 group-hover:opacity-100 transition-all drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]">-&gt;</span>
-                      <span className="group-hover:translate-x-1 transition-transform inline-block font-semibold lowercase tracking-widest">{link.name}</span>
+                      <span className="group-hover:translate-x-1 transition-transform inline-block font-semibold lowercase tracking-wider text-xs sm:text-sm">{link.name}</span>
                     </Link>
                   </motion.li>
                 ))}
@@ -223,12 +240,12 @@ export default function Footer() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="space-y-6"
+              className="space-y-4 sm:space-y-6"
             >
               <div className="flex flex-col gap-1">
-                <span className="text-[0.85rem] text-purple-400 tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]">:: Services</span>
+                <span className="text-[0.7rem] sm:text-[0.85rem] text-purple-400 tracking-[0.2em] sm:tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]">:: Services</span>
               </div>
-              <ul className="space-y-4 text-sm">
+              <ul className="space-y-3 sm:space-y-4 text-xs sm:text-sm">
                 {services.map((service) => (
                   <motion.li
                     key={service.name}
@@ -240,7 +257,7 @@ export default function Footer() {
                       className="group text-gray-100 hover:text-purple-400 transition-all duration-300 flex items-center gap-2 cursor-pointer"
                     >
                       <span className="w-1.5 h-1.5 bg-purple-400 rounded-full group-hover:bg-purple-500 group-hover:shadow-[0_0_12px_rgba(168,85,247,0.8)] transition-all" />
-                      <span className="group-hover:translate-x-1 transition-transform inline-block font-semibold lowercase tracking-widest">{service.name.replace(/\s+/g, '_')}()</span>
+                      <span className="group-hover:translate-x-1 transition-transform inline-block font-semibold lowercase tracking-wider text-xs sm:text-sm">{service.name.replace(/\s+/g, '_')}()</span>
                     </Link>
                   </motion.li>
                 ))}
@@ -248,47 +265,27 @@ export default function Footer() {
             </motion.div>
           </div>
 
-          {/* Social Icons (Mobile Only) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="md:hidden flex gap-5 justify-center py-6"
-          >
-            {socialLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-15 h-15 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-center text-3xl shadow-lg shadow-black/50 hover:bg-white/10 hover:border-cyan-500/30 transition-all duration-300"
-              >
-                {link.icon}
-              </motion.a>
-            ))}
-          </motion.div>
 
           {/* Newsletter */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="space-y-6 font-mono"
+            className="space-y-4 sm:space-y-6 font-mono col-span-1 sm:col-span-2 lg:col-span-1"
           >
-            <div className="flex flex-col gap-1 text-center md:text-left">
-              <span className="text-[0.85rem] text-emerald-400 tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(52,211,153,0.4)]">:: Stay Connected</span>
+            <div className="flex flex-col gap-1 text-center sm:text-left">
+              <span className="text-[0.7rem] sm:text-[0.85rem] text-emerald-400 tracking-[0.2em] sm:tracking-[0.3em] font-bold drop-shadow-[0_0_8px_rgba(52,211,153,0.4)]">:: Stay Connected</span>
             </div>
-            <p className="text-gray-100 text-xs md:text-sm text-center md:text-left">
+            <p className="text-gray-100 text-xs sm:text-sm text-center sm:text-left">
               <span className="text-emerald-400 font-bold">&gt;</span> Subscribe to get updates on new projects and tech insights.
             </p>
-            <form onSubmit={handleSubscribe} className="space-y-4">
+            <form onSubmit={handleSubscribe} className="space-y-3 sm:space-y-4">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="root@identity.dev"
-                className="w-full px-5 py-4 bg-white/5 border border-white/10 rounded-full text-sm text-white placeholder-gray-600 focus:border-cyan-500/60 focus:bg-white/10 focus:outline-none transition-all duration-300"
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-white/5 border border-white/10 rounded-full text-xs sm:text-sm text-white placeholder-gray-600 focus:border-cyan-500/60 focus:bg-white/10 focus:outline-none transition-all duration-300"
                 required
                 disabled={isSubscribing}
               />
@@ -297,7 +294,7 @@ export default function Footer() {
                 whileHover={{ scale: 1.02, backgroundColor: "white", color: "black", boxShadow: "0 0 25px rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.98 }}
                 disabled={isSubscribing}
-                className="w-full px-5 py-4 bg-white/10 border border-white/20 text-white text-xs font-black uppercase tracking-[0.2em] transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-full"
+                className="w-full px-4 sm:px-5 py-3 sm:py-4 bg-white/10 border border-white/20 text-white text-[0.65rem] sm:text-xs font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.05)] rounded-full"
               >
                 {isSubscribing ? "> INITIALIZING..." : "> EXECUTE_SUBSCRIBE"}
               </motion.button>
@@ -308,7 +305,7 @@ export default function Footer() {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`p-3 rounded-lg text-xs font-mono border ${subscribeMessage.includes("Thank you") || subscribeMessage.includes("Successfully")
+                  className={`p-2 sm:p-3 rounded-lg text-[0.65rem] sm:text-xs font-mono border ${subscribeMessage.includes("Thank you") || subscribeMessage.includes("Successfully")
                     ? "bg-green-500/10 border-green-500/30 text-green-400"
                     : "bg-red-500/10 border-red-500/30 text-red-400"
                     }`}
@@ -325,18 +322,18 @@ export default function Footer() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="mt-20 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left font-mono text-[0.7rem] md:text-xs tracking-[0.2em] uppercase"
+          className="mt-12 sm:mt-16 md:mt-20 pt-6 sm:pt-8 md:pt-10 border-t border-white/10 flex flex-col gap-4 sm:gap-6 text-center font-mono text-[0.6rem] sm:text-[0.65rem] md:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase"
         >
-          <div className="text-gray-200 flex items-center gap-5">
+          <div className="text-gray-200 flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-5">
             <span className="hover:text-white transition-colors cursor-default font-semibold">(c) {new Date().getFullYear()} DINESH_RAJ</span>
-            <span className="hidden md:block opacity-30">|</span>
+            <span className="hidden sm:block opacity-30">|</span>
             <span className="flex items-center gap-2 text-emerald-400 font-bold">
               <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.6)]" />
               SYSTEM_READY
             </span>
           </div>
 
-          <div className="flex items-center gap-3 text-gray-500">
+          <div className="flex flex-col sm:flex-row items-center gap-3 text-gray-500">
             <span>Designed & Engineered by</span>
             <span className="text-white font-black px-3 py-1 bg-white/5 border border-white/10 rounded-full hover:bg-white hover:text-black transition-all duration-500 cursor-default">
               DINESH_RAJ
