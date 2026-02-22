@@ -2,93 +2,133 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 
 const ContactForm = ({ formData, handleChange, handleSubmit, errors, isSubmitting, submitMessage }) => (
-  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-    <div>
-      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Name</label>
-      <input
-        id="name"
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors ${errors.name ? 'border-red-500' : 'border-white/10'}`}
-        placeholder="Enter Your Name"
-      />
-      {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
-    </div>
-    <div>
-      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Email</label>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors ${errors.email ? 'border-red-500' : 'border-white/10'}`}
-        placeholder="your@email.com"
-      />
-      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
-    </div>
-    <div>
-      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Phone Number</label>
-      <input
-        id="phone"
-        type="tel"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors"
-        placeholder="+91 98765 43210"
-      />
-    </div>
-    <div>
-      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Project Type</label>
-      <select
-        id="category"
-        name="category"
-        value={formData.category}
-        onChange={handleChange}
-        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors appearance-none"
-      >
-        <option value="">Select a category</option>
-        <option value="frontend">Frontend Development</option>
-        <option value="fullstack">Full Stack Application</option>
-        <option value="freelance">Freelance Project</option>
-        <option value="career">Career Opportunity</option>
-      </select>
-    </div>
-    <div>
-      <label className="block text-gray-400 text-sm font-bold mb-2 uppercase">Message</label>
-      <textarea
-        id="message"
-        name="message"
-        value={formData.message}
-        onChange={handleChange}
-        rows={4}
-        className={`w-full bg-black/40 border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors resize-none ${errors.message ? 'border-red-500' : 'border-white/10'}`}
-        placeholder="Tell me about your project or opportunity..."
-      />
-      {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+  <motion.form
+    onSubmit={handleSubmit}
+    className="font-mono space-y-6"
+    noValidate
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5, duration: 0.6 }}
+  >
+    {/* Terminal-style form inputs */}
+    <div className="space-y-4">
+      {/* Name Input */}
+      <div className="flex items-start gap-3">
+        <span className="text-cyan-400/80 mt-1">❯</span>
+        <div className="flex-1">
+          <div className="text-purple-300/80 text-sm mb-1">const name =</div>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            className={`w-full bg-black/30 border rounded-lg px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors ${errors.name ? 'border-red-500' : 'border-white/20'}`}
+            placeholder='"Your Name"'
+          />
+          {errors.name && <p className="text-red-500 text-xs mt-1 font-mono">{errors.name}</p>}
+        </div>
+      </div>
+
+      {/* Email Input */}
+      <div className="flex items-start gap-3">
+        <span className="text-cyan-400/80 mt-1">❯</span>
+        <div className="flex-1">
+          <div className="text-purple-300/80 text-sm mb-1">const email =</div>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            className={`w-full bg-black/30 border rounded-lg px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors ${errors.email ? 'border-red-500' : 'border-white/20'}`}
+            placeholder='"your@email.com"'
+          />
+          {errors.email && <p className="text-red-500 text-xs mt-1 font-mono">{errors.email}</p>}
+        </div>
+      </div>
+
+      {/* Phone Input */}
+      <div className="flex items-start gap-3">
+        <span className="text-cyan-400/80 mt-1">❯</span>
+        <div className="flex-1">
+          <div className="text-purple-300/80 text-sm mb-1">const phone =</div>
+          <input
+            id="phone"
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            className="w-full bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors"
+            placeholder='"+"91 98765 43210"'
+          />
+        </div>
+      </div>
+
+      {/* Category Select */}
+      <div className="flex items-start gap-3">
+        <span className="text-cyan-400/80 mt-1">❯</span>
+        <div className="flex-1">
+          <div className="text-purple-300/80 text-sm mb-1">const projectType =</div>
+          <select
+            id="category"
+            name="category"
+            value={formData.category}
+            onChange={handleChange}
+            className="w-full bg-black/30 border border-white/20 rounded-lg px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors appearance-none"
+          >
+            <option value="" className="bg-black">Select project type...</option>
+            <option value="frontend" className="bg-black">Frontend Development</option>
+            <option value="fullstack" className="bg-black">Full Stack Application</option>
+            <option value="freelance" className="bg-black">Freelance Project</option>
+            <option value="career" className="bg-black">Career Opportunity</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Message Textarea */}
+      <div className="flex items-start gap-3">
+        <span className="text-cyan-400/80 mt-1">❯</span>
+        <div className="flex-1">
+          <div className="text-purple-300/80 text-sm mb-1">const message =</div>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            rows={4}
+            className={`w-full bg-black/30 border rounded-lg px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-cyan-400 transition-colors resize-none ${errors.message ? 'border-red-500' : 'border-white/20'}`}
+            placeholder='"Tell me about your project..."'
+          />
+          {errors.message && <p className="text-red-500 text-xs mt-1 font-mono">{errors.message}</p>}
+        </div>
+      </div>
     </div>
 
-    <button
+    {/* Submit Button */}
+    <motion.button
       type="submit"
       disabled={isSubmitting}
-      className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-bold py-4 rounded-xl hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+      className="w-full mt-8 bg-gradient-to-r from-cyan-500 to-purple-600 text-white font-mono py-3 rounded-lg hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
     >
-      {isSubmitting ? "Sending..." : "Send Message"}
-    </button>
+      <span className="text-cyan-400/80">❯</span> {isSubmitting ? "contact.send()" : "contact.send()"}
+    </motion.button>
 
+    {/* Success Message */}
     {submitMessage && (
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-green-400 text-center font-medium mt-4"
+        className="mt-6 p-3 bg-green-500/10 border border-green-500/20 rounded-lg"
       >
-        {submitMessage}
+        <div className="text-green-400 font-mono text-sm">
+          <span className="text-green-300">✓</span> {submitMessage}
+        </div>
       </motion.div>
     )}
-  </form>
+  </motion.form>
 );
 
 const Contact = () => {
@@ -166,20 +206,94 @@ const Contact = () => {
           {/* Vertical Stack: Text -> Form -> Custom Links */}
           <div className="md:hidden flex flex-col gap-12 max-w-4xl mx-auto">
 
-            {/* 1. Hero Text Section */}
+            {/* 1. Hero Text Section - Coder Style */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center space-y-6"
             >
-              <h1 className="text-4xl font-bold leading-tight">
-                Let's Build Something <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">Extraordinary.</span>
-              </h1>
-              <p className="text-gray-400 text-lg leading-relaxed max-w-2xl mx-auto">
-                I'm currently accepting new projects and opportunities. Whether you have a clear roadmap or just a spark of an idea, let's discuss how we can bring it to life with precision and creativity.
-              </p>
+              {/* Terminal-style section header */}
+              <motion.div
+                className="font-mono text-sm mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <div className="flex items-center justify-center gap-2 text-cyan-300/80 mb-2">
+                  <span className="animate-pulse">❯</span>
+                  <span>contact</span>
+                  <span className="text-purple-300/80">--init</span>
+                  <span className="text-gray-400">--interactive</span>
+                </div>
+                <div className="text-green-300/60 text-xs">
+                  Initializing contact interface... ✓
+                </div>
+              </motion.div>
+
+              {/* Code-style main title */}
+              <div className="font-mono text-lg space-y-2 mb-6">
+                <motion.div
+                  className="text-purple-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                >
+                  const contact = {"{"}
+                </motion.div>
+                <motion.div
+                  className="ml-4 text-cyan-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  message: "Let's Build Something
+                </motion.div>
+                <motion.div
+                  className="ml-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                  Extraordinary
+                </motion.div>
+                <motion.div
+                  className="text-cyan-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.5 }}
+                >
+                  "
+                </motion.div>
+                <motion.div
+                  className="text-purple-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                >
+                  {"}"};
+                </motion.div>
+              </div>
+
+              {/* Code comment description */}
+              <motion.div
+                className="font-mono text-sm space-y-2 max-w-2xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+              >
+                <div className="text-green-300/80">
+                  {"/*"}
+                </div>
+                <div className="text-gray-300 ml-4 leading-relaxed">
+                  I'm currently accepting new projects and opportunities.<br/>
+                  Whether you have a clear roadmap or just a spark of an idea,<br/>
+                  let's discuss how we can bring it to life with precision and creativity.
+                </div>
+                <div className="text-green-300/80">
+                  {"*/"}
+                </div>
+              </motion.div>
             </motion.div>
 
             {/* 2. Contact Form */}
@@ -206,60 +320,66 @@ const Contact = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="pt-4 pb-4"
             >
-              {/* Row 1: LinkedIn (Left) --- Phone (Right) */}
-              <div className="flex justify-between items-center mb-8">
-                {/* LinkedIn Left */}
-                <a
-                  href="https://www.linkedin.com/in/dinesh-webdevelopment/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 group"
+              {/* Terminal-style contact information */}
+              <div className="font-mono space-y-6">
+                {/* Email */}
+                <motion.div
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
                 >
-                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-xl group-hover:bg-cyan-500/20 transition-colors">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
+                  <span className="text-cyan-400/80 mt-1">❯</span>
+                  <div className="flex-1">
+                    <div className="text-purple-300/80 text-sm mb-1">const email =</div>
+                    <a
+                      href="mailto:dinesh.apply.in@gmail.com"
+                      className="text-yellow-300/80 font-mono text-sm hover:text-cyan-300 transition-colors"
+                    >
+                      "dinesh.apply.in@gmail.com"
+                    </a>
                   </div>
-                  <div className="text-left">
-                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">LinkedIn</p>
-                    <p className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors">Dinesh Raj</p>
-                  </div>
-                </a>
+                </motion.div>
 
-                {/* Phone Right */}
-                {/* Phone Right */}
-                <a
-                  href="tel:+919080192044"
-                  className="flex items-center gap-3 group"
+                {/* LinkedIn */}
+                <motion.div
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
                 >
-                  <div className="w-10 h-10 bg-white/5 rounded-full flex items-center justify-center text-xl group-hover:bg-purple-500/20 transition-colors">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                    </svg>
+                  <span className="text-cyan-400/80 mt-1">❯</span>
+                  <div className="flex-1">
+                    <div className="text-purple-300/80 text-sm mb-1">const linkedin =</div>
+                    <a
+                      href="https://www.linkedin.com/in/dinesh-webdevelopment/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-yellow-300/80 font-mono text-sm hover:text-cyan-300 transition-colors"
+                    >
+                      "Dinesh Raj"
+                    </a>
                   </div>
-                  <div className="text-left">
-                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider">Phone</p>
-                    <p className="text-sm font-medium text-white group-hover:text-purple-400 transition-colors">+91 90801-92044</p>
-                  </div>
-                </a>
-              </div>
+                </motion.div>
 
-              {/* Row 2: Email (Center) */}
-              <div className="flex justify-center">
-                <a
-                  href="mailto:dinesh.apply.in@gmail.com"
-                  className="flex flex-col items-center gap-3 group text-center"
+                {/* Phone */}
+                <motion.div
+                  className="flex items-start gap-3"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.7, duration: 0.6 }}
                 >
-                  <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-2xl group-hover:bg-green-500/20 transition-colors">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg>
+                  <span className="text-cyan-400/80 mt-1">❯</span>
+                  <div className="flex-1">
+                    <div className="text-purple-300/80 text-sm mb-1">const phone =</div>
+                    <a
+                      href="tel:+919080192044"
+                      className="text-yellow-300/80 font-mono text-sm hover:text-cyan-300 transition-colors"
+                    >
+                      "+91 90801-92044"
+                    </a>
                   </div>
-                  <div>
-                    <p className="text-xs text-gray-500 font-bold uppercase tracking-wider mb-1">Email Me</p>
-                    <p className="text-lg font-medium text-white group-hover:text-green-400 transition-colors">dinesh.apply.in@gmail.com</p>
-                  </div>
-                </a>
+                </motion.div>
               </div>
             </motion.div>
           </div>
@@ -274,50 +394,149 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
+              {/* Terminal-style section header */}
+              <motion.div
+                className="font-mono text-sm mb-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.5 }}
+              >
+                <div className="flex items-center gap-2 text-cyan-300/80 mb-2">
+                  <span className="animate-pulse">❯</span>
+                  <span>contact</span>
+                  <span className="text-purple-300/80">--init</span>
+                  <span className="text-gray-400">--interactive</span>
+                </div>
+                <div className="text-green-300/60 text-xs">
+                  Initializing contact interface... ✓
+                </div>
+              </motion.div>
+
               <h2 className="text-cyan-500 font-bold tracking-widest uppercase mb-4">Contact Me</h2>
-              <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-                Let's Build Something <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">Extraordinary.</span>
-              </h1>
-              <p className="text-gray-400 text-lg mb-12 leading-relaxed">
-                I'm currently accepting new projects and opportunities.
-                Whether you have a clear roadmap or just a spark of an idea, let's discuss how we can bring it to life with precision and creativity.
-              </p>
+
+              {/* Code-style main title */}
+              <div className="font-mono text-xl space-y-2 mb-8">
+                <motion.div
+                  className="text-purple-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
+                >
+                  const contact = {"{"}
+                </motion.div>
+                <motion.div
+                  className="ml-4 text-cyan-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.5 }}
+                >
+                  message: "Let's Build Something
+                </motion.div>
+                <motion.div
+                  className="ml-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 text-2xl"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                >
+                  Extraordinary
+                </motion.div>
+                <motion.div
+                  className="text-cyan-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
+                >
+                  "
+                </motion.div>
+                <motion.div
+                  className="text-purple-300/80"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.7, duration: 0.5 }}
+                >
+                  {"}"};
+                </motion.div>
+              </div>
+
+              {/* Code comment description */}
+              <motion.div
+                className="font-mono text-base space-y-2 mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+              >
+                <div className="text-green-300/80">
+                  {"/*"}
+                </div>
+                <div className="text-gray-300 ml-4 leading-relaxed">
+                  I'm currently accepting new projects and opportunities.<br/>
+                  Whether you have a clear roadmap or just a spark of an idea,<br/>
+                  let's discuss how we can bring it to life with precision and creativity.
+                </div>
+                <div className="text-green-300/80">
+                  {"*/"}
+                </div>
+              </motion.div>
 
               <div className="space-y-8">
-                <div className="flex items-start md:items-center gap-6">
-                  <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-2xl border border-white/10 flex-shrink-0">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg>
+                {/* Email - Coder Style */}
+                <motion.div
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.6 }}
+                >
+                  <span className="text-cyan-400/80 font-mono">❯</span>
+                  <div className="font-mono">
+                    <div className="text-purple-300/80 text-sm mb-1">const email =</div>
+                    <a
+                      href="mailto:dinesh.apply.in@gmail.com"
+                      className="text-yellow-300/80 text-lg font-medium hover:text-cyan-400 transition-colors"
+                    >
+                      "dinesh.apply.in@gmail.com"
+                    </a>
                   </div>
-                  <div>
-                    <p className="text-gray-500 text-sm font-bold uppercase">Email</p>
-                    <a href="mailto:dinesh.apply.in@gmail.com" className="text-xl font-medium hover:text-cyan-400 transition-colors">dinesh.apply.in@gmail.com</a>
+                </motion.div>
+
+                {/* LinkedIn - Coder Style */}
+                <motion.div
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.6 }}
+                >
+                  <span className="text-cyan-400/80 font-mono">❯</span>
+                  <div className="font-mono">
+                    <div className="text-purple-300/80 text-sm mb-1">const linkedin =</div>
+                    <a
+                      href="https://www.linkedin.com/in/dinesh-webdevelopment/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-yellow-300/80 text-lg font-medium hover:text-cyan-400 transition-colors"
+                    >
+                      "Dinesh Raj"
+                    </a>
                   </div>
-                </div>
-                <div className="flex items-start md:items-center gap-6">
-                  <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-2xl border border-white/10 flex-shrink-0">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                    </svg>
+                </motion.div>
+
+                {/* Phone - Coder Style */}
+                <motion.div
+                  className="flex items-start gap-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                >
+                  <span className="text-cyan-400/80 font-mono">❯</span>
+                  <div className="font-mono">
+                    <div className="text-purple-300/80 text-sm mb-1">const phone =</div>
+                    <a
+                      href="tel:+919080192044"
+                      className="text-yellow-300/80 text-lg font-medium hover:text-cyan-400 transition-colors"
+                    >
+                      "+91 90801-92044"
+                    </a>
                   </div>
-                  <div>
-                    <p className="text-gray-500 text-sm font-bold uppercase">LinkedIn</p>
-                    <a href="https://www.linkedin.com/in/dinesh-webdevelopment/" target="_blank" rel="noopener noreferrer" className="text-xl font-medium hover:text-cyan-400 transition-colors">Dinesh Raj</a>
-                  </div>
-                </div>
-                <div className="flex items-start md:items-center gap-6">
-                  <div className="w-14 h-14 bg-white/5 rounded-full flex items-center justify-center text-2xl border border-white/10 flex-shrink-0">
-                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
-                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-gray-500 text-sm font-bold uppercase">Phone</p>
-                    <a href="tel:+919080192044" className="text-xl font-medium hover:text-cyan-400 transition-colors">+91 90801-92044</a>
-                  </div>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
 
