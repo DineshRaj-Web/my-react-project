@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import WorkHero from "./WorkHero";
 import ProjectGrid from "./ProjectGrid";
 import Experience from "./Experience";
-import AdditionalTechnologies from "./AdditionalTechnologies";
 
 const Work = () => {
   return (
@@ -16,7 +15,6 @@ const Work = () => {
         <WorkHero />
         <Experience />
         <ProjectGrid />
-        <AdditionalTechnologies />
       </motion.div>
     </div>
   );

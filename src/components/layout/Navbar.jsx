@@ -56,9 +56,9 @@ const Navbar = () => {
               className="w-10 h-10 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-all duration-300 overflow-hidden"
             >
               <img
-                src="/DR-Logo.png"
+                src="/DR-Logo.svg"
                 alt="Logo"
-                className="w-full h-full object-cover p-1"
+                className="w-full h-full object-contain p-1.5"
               />
             </motion.div>
           </Link>
